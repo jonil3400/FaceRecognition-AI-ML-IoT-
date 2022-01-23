@@ -1,0 +1,31 @@
+from compreface import CompreFace
+from compreface.service import RecognitionService
+from compreface.collections import FaceCollection
+
+
+
+
+HOST: str = 'http://localhost'
+PORT: str = '8000'
+RECOGNITION_API_KEY: str = '857057d0-608c-4b36-add8-9695f843e688'
+
+compre_face: CompreFace = CompreFace(HOST, PORT, {
+            "limit": 0,
+            "det_prob_threshold": 0.8,
+            "prediction_count": 1,
+            "face_plugins": "age,gender,mask",
+            "status": False
+        })
+
+recognition: RecognitionService = compre_face.init_face_recognition(
+    RECOGNITION_API_KEY)
+
+face_collection: FaceCollection = recognition.get_face_collection()
+
+
+
+
+image: str = 'D:/4thYr-1stSem/OJT 2/FaceRecognition/Face3.jpg'
+subject: str = 'Jonil'
+
+print(face_collection.add(image,subject))
